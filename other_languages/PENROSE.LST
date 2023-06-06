@@ -1,0 +1,104 @@
+' This file is part of the penrose_tiling Fortran project.
+' Copyright (C) 2023 Vincent MAGNIN
+'
+' This is free software; you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation; either version 3, or (at your option)
+' any later version.
+'
+' This software is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License along with
+' this program; see the files LICENSE and LICENSE_EXCEPTION respectively.
+' If not, see <http:'www.gnu.org/licenses/>.
+'------------------------------------------------------------------------------
+' Contributed by Vincent Magnin
+' GFA BASIC version: 1991-09-12
+'------------------------------------------------------------------------------
+
+CLS
+or=(1+SQR(5))/2
+PRINT "Pavage de PENROSE. Vincent 12/09/1991"
+INPUT "niveau (ex:8)=";niveau%
+CLS
+d%=400
+h=d%*SQR(or^2-1/4)
+atriangle(0,0,0,d%,h,d%/2,1)
+attente
+clignotage
+END
+'
+> PROCEDURE atriangle(x1,y1,x2,y2,x3,y3,n%)
+  LOCAL x4,y4,x5,y5
+  IF n%<niveau%
+    d1=@dist(x1,y1,x2,y2)
+    d2=@dist(x1,y1,x3,y3)
+    d3=@dist(x2,y2,x3,y3)
+    INC n%
+    IF MIN(d1,d2,d3)=d1
+      SWAP x1,x3
+      SWAP y1,y3
+    ELSE IF MIN(d1,d2,d3)=d2
+      SWAP x1,x2
+      SWAP y1,y2
+    ENDIF
+    x4=(or*x3+x1)/(or+1)
+    y4=(or*y3+y1)/(or+1)
+    x5=(or*x1+x2)/(or+1)
+    y5=(or*y1+y2)/(or+1)
+    atriangle(x4,y4,x5,y5,x2,y2,n%)
+    atriangle(x2,y2,x3,y3,x4,y4,n%)
+    btriangle(x1,y1,x4,y4,x5,y5,n%)
+  ELSE
+    COLOR 1
+    DRAW x1,y1 TO x2,y2 TO x3,y3 TO x1,y1
+    FILL (x1+x2+x3)/3,(y1+y2+y3)/3
+    COLOR 0
+    DRAW x1,y1 TO x2,y2 TO x3,y3 TO x1,y1
+    COLOR 1
+  ENDIF
+RETURN
+'
+> PROCEDURE btriangle(x1,y1,x2,y2,x3,y3,n%)
+  LOCAL x4,y4
+  IF n%<niveau%
+    d1=@dist(x1,y1,x2,y2)
+    d2=@dist(x1,y1,x3,y3)
+    d3=@dist(x2,y2,x3,y3)
+    INC n%
+    IF MAX(d1,d2,d3)=d1
+      SWAP x1,x3
+      SWAP y1,y3
+    ELSE IF MAX(d1,d2,d3)=d2
+      SWAP x1,x2
+      SWAP y1,y2
+    ENDIF
+    x4=(or*x2+x3)/(or+1)
+    y4=(or*y2+y3)/(or+1)
+    atriangle(x1,y1,x3,y3,x4,y4,n%)
+    btriangle(x1,y1,x2,y2,x4,y4,n%)
+  ELSE
+    DRAW x1,y1 TO x2,y2 TO x3,y3 TO x1,y1
+  ENDIF
+RETURN
+'
+> FUNCTION dist(x1,y1,x2,y2)
+RETURN SQR((x2-x1)^2+(y2-y1)^2)
+ENDFUNC
+'
+> PROCEDURE attente
+REPEAT
+UNTIL MOUSEK
+RETURN
+'
+PROCEDURE clignotage
+REPEAT
+  SETCOLOR 0,0
+  DELAY 1
+  SETCOLOR 0,1
+  DELAY 1
+UNTIL MOUSEK=2
+RETURN
