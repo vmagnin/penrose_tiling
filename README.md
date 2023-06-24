@@ -6,7 +6,7 @@ The algorithm uses acute and obtuse golden triangles, with two interlaced recurs
 
 See the project https://github.com/vmagnin/hat_polykite for more information on the *ein Stein* problem and the tiling of the plane, and the most recent results in this domain.
 
-![A Penrose tiling](figures/penrose_tiling_10.svg)
+![A Penrose tiling](penrose_tiling_10.svg)
 
 Be careful with the number of recursions: the SVG file is growing like the Fibonacci sequence! 12 recursions will generate a 12.7 Mio SVG file. 15 recursions will give a 228 Mio file and your SVG viewer may freeze or crash...
 
@@ -64,6 +64,7 @@ The documentation is under the [GNU Free Documentation License 1.3 or any later 
 
 ## Bibliography
 
+* Roger Penrose, Set of tiles for covering a surface, Patent GB1548164A ([US-4133152-A](https://patents.google.com/patent/US4133152A/en)), filed 1975-06-25.
 * Hargittai, Istvan, et Balazs Hargittai. « 2020 Physics Nobel Laureate Roger Penrose and the Penrose Pattern as a Forerunner of Generalized Crystallography ». *Structural Chemistry* 32, no.1 (1st February 2021): 1‑7. https://doi.org/10.1007/s11224-020-01669-8
 * https://en.wikipedia.org/wiki/Einstein_problem
 * https://en.wikipedia.org/wiki/Penrose_tiling
