@@ -6,7 +6,7 @@ The algorithm uses acute and obtuse golden triangles, with two interlaced recurs
 
 See the project https://github.com/vmagnin/hat_polykite for more information on the *ein Stein* problem and the tiling of the plane, and the most recent results in this domain.
 
-![A Penrose tiling](penrose_tiling_10.svg)
+![A Penrose tiling](figures/penrose_tiling_10.svg)
 
 Be careful with the number of recursions: the SVG file is growing like the Fibonacci sequence! 12 recursions will generate a 12.7 Mio SVG file. 15 recursions will give a 228 Mio file and your SVG viewer may freeze or crash...
 
